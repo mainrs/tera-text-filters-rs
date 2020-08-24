@@ -1,31 +1,30 @@
-# zerotask-rust-lib-template
+# tera-text-filters
 
-[![docs_master_badge]][docs_master_url]
+[![crates.io](https://img.shields.io/crates/v/tera-text-filters.svg)](https://crates.io/crates/tera-text-filters)
+[![crates.io](https://img.shields.io/crates/d/tera-text-filters)](https://crates.io/crates/tera-text-filters)
+[![Documentation](https://docs.rs/tera-text-filters/badge.svg)](https://docs.rs/tera-text-filters)
 
-> A GitHub template for Rust libraries.
+> Text transformation filters for the Tera template engine.
 
-> __NOTE:__ PLEASE change the name inside the license files!!!
+## Usage
 
-## Features
+```rust
+use tera::Tera;
+use tera_text_filters::camel_case;
 
-- Continuous Integration through GitHub Actions
-  - Each PR is tested by running the following commands to ensure that only working code is added to the repository:
-    - `cargo fmt` to ensure uniform source code formatting.
-    - `cargo clippy` to use more idiomic Rust code, optimize code as well as prevent hard to spot bugs.
-    - `cargo check` to ensure that the library compiles properly.
-    - `cargo test` to ensure that the library works as expected.
-  - Each push to master triggers the following:
-    - Generation of the newest documentation that gets pushed to the `gh-pages` branch.
-- MSRV (**M**inimal **s**upported **R**ust **v**ersion)
-  - Kept in sync with the latest available Rust version on Ubuntu.
-- Opinioded `rustfmt` configuration file.
-- Misc
-  - `.editorconfig` file for code-unrelated files.
-    - Ensures proper formatting for workflow files and other configuration files.
+let mut tera = Tera::default();
+tera.register_filter("camel_case", camel_case);
+```
 
-## Current Properties
+Alternatively, you can register all filters at once:
 
-- MSRV: 1.41.0
+```rust
+use tera::Tera;
+use tera_text_filters::register_all;
+
+let mut tera = Tera::default();
+register_all(&mut tera);
+```
 
 ## License
 
@@ -42,6 +41,3 @@ at your option.
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
-
-[docs_master_badge]: https://img.shields.io/badge/docs.rs-master-green
-[docs_master_url]: https://<username>.github.io/<reponame>
